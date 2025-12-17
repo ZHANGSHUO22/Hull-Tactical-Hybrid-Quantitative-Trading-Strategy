@@ -49,10 +49,8 @@ The code follows a strict pipeline to ensure reproducibility and prevent look-ah
 ## Code Structure
 
 ```bash
-├── train.csv                # Historical market data
 ├── main.py                  # Main script (Training, OOF, Optimization, Inference)
-├── README.md                # Project documentation
-└── kaggle_evaluation/       # Kaggle specific evaluation utilities
+└── README.md                # Project documentation
 ```
 
 ## Usage
