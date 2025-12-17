@@ -53,24 +53,12 @@ The code follows a strict pipeline to ensure reproducibility and prevent look-ah
 └── README.md                # Project documentation
 ```
 
-## Usage
+## Install Dependencies
 
-To run the simulation and training locally:
-
-1.  **Install Dependencies:**
 
     ```bash
     pip install numpy pandas polars scikit-learn lightgbm torch tqdm
     ```
-
-2.  **Run the script:**
-
-    ```python
-    python main.py
-    ```
-
-3.  **Inference Mode:**
-    The script includes a `predict()` function designed for the Kaggle API. It handles state management (history buffer) and rolling feature engineering automatically.
 
 ## Key Code Snippets
 
