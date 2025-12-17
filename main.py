@@ -173,7 +173,7 @@ y_full_raw = train['forward_returns'].values
 y_full_cls = (y_full_target > 0).astype(int)
 
 splits = range(MIN_TRAIN_DAYS, len(train), TEST_WINDOW)
-print(f"🔄 Total Folds to Run: {len(splits)}")
+print(f"Total Folds to Run: {len(splits)}")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 for i, split_idx in enumerate(tqdm(splits)):
@@ -222,13 +222,13 @@ for i, split_idx in enumerate(tqdm(splits)):
         pred_n = temp_model(t_X_te).cpu().numpy().flatten()
     oof_pred_nn[train_end:test_end] = pred_n
 
-print("✅ Walk-Forward Generation Complete.")
+print(" Walk-Forward Generation Complete.")
 
 # ============================================
 # Step 5: Monte Carlo Robust Optimization
 # ============================================
 print("\n" + "="*60)
-print("🧬 STEP 5: ROBUST PARAMETER SEARCH (MONTE CARLO + CVaR)")
+print(" STEP 5: ROBUST PARAMETER SEARCH (MONTE CARLO + CVaR)")
 print("="*60)
 
 # --- 1. 准备有效数据 ---
@@ -364,16 +364,16 @@ for w in np.arange(0.0, 1.01, 0.2):
             final_m = m
 
 print("-" * 75)
-print(f"🏆 Best Robust Parameters (Optimized for Tail Risk):")
-print(f"✅ Optimal Ridge Weight: {final_w:.2f}")
-print(f"✅ Optimal Multiplier:   {final_m:.2f}")
-print(f"📊 Robust Metric Score:  {best_robust_score:.4f}")
+print(f" Best Robust Parameters (Optimized for Tail Risk):")
+print(f"Optimal Ridge Weight: {final_w:.2f}")
+print(f" Optimal Multiplier:   {final_m:.2f}")
+print(f" Robust Metric Score:  {best_robust_score:.4f}")
 
 # 自动安全修正 (基于 ES 逻辑)
 if final_m > 2.2:
     print("\n⚠️ 自动安全修正: 降低杠杆以构建安全缓冲")
     final_m = min(final_m, 2.2)
-    print(f"🔒 Final Safe Multiplier: {final_m}")
+    print(f" Final Safe Multiplier: {final_m}")
 
 print("="*60 + "\n")
 
@@ -471,4 +471,4 @@ submission = pd.DataFrame({'date_id': sim_test['date_id'], 'prediction': alloc_f
 # 7. 评分检查
 # ============================================
 final_score = local_score_check(sim_test, submission)
-print(f"✅ Final Test Score: {final_score:.4f}")
+print(f" Final Test Score: {final_score:.4f}")
